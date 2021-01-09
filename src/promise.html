@@ -1,0 +1,58 @@
+<html> 
+    <body>
+        <script>
+                // resolve,reject,all,rect
+                // resolve==then,reject==catch
+                let promise=new Promise((resolve,reject)=>{
+                    resolve(111);
+                })
+
+                promise.then(Response=>{
+                    console.log(Response);
+                }).catch(error=>{
+                    console.log(error);
+                })
+                
+                // 链式
+                function promise1(status){
+                    return new Promise((resolve,reject)=>{
+                        if(status){
+                            resolve("第一个成功");
+                        }
+                        reject("第一个失败");
+                    })
+                }
+                function promise2(status){
+                    return new Promise((resolve,reject)=>{
+                        if(status){
+                            resolve("第二个成功");
+                        }
+                        reject("第二个失败");
+                    })
+                }
+
+                promise1(true).then(res=>{ //第一个
+                    console.log(res);
+                   return promise2(true);
+                }).then(res=>{      //第二个
+                    console.log(res);
+                }).catch(error=>{
+                    console.log(error);
+                })
+
+                //All 数组内有pormise必须全部成功，才会执行then回调，否则会执行catch
+                Promise.all([promise1(true),promise2(true)]).then(response=>{
+                    console.log("全部调用成功");
+                }).catch(error=>{
+                    console.log("有些可能失败了");
+                })
+
+                //rece 当在执行的时候，第一个返回resolve 则执行then回调，否则执行catch
+                Promise.rece([promise1(true),promise2(true)]).then(response=>{
+                    console.log("全部调用成功");
+                }).catch(error=>{
+                    console.log("有些可能失败了");
+                })
+        </script>
+    </body>
+</html>

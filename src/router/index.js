@@ -13,6 +13,19 @@ const routes = [
     path:"/Login",
     name:"login",
     component:()=>import("../views/Login/index.vue")
+  },
+  {
+    path:"/Layout",
+    name:"Layout",
+    redirect:"index",
+    component:()=>import("../views/Layout/index.vue"),
+    children:[
+      {
+        path:"/index",
+        name:"index",
+        component:()=>import("../views/Home/index.vue")
+      }
+    ]
   }
 ];
 

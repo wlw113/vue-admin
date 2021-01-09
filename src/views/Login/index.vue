@@ -153,6 +153,9 @@ export default {
     const submitForm=(formName=> {
         context.refs[formName].validate((valid) => {
           if (valid) {
+           context.root.$router.push({
+              name:'Layout'
+            })
             alert('submit!');
           } else {
             console.log('error submit!!');
